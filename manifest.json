@@ -1,0 +1,36 @@
+{
+    "name": "cursor changer",
+    "description" : "you can choose any cursor icon",
+    "version": "1.0",
+    "icons":{
+        "128":"images/cursor.png",
+        "48":"images/cursor.png",
+        "16":"images/cursor.png"
+    },
+
+    "manifest_version": 2,
+    "browser_action": {
+      "default_icon": "images/cursor.png",
+      "default_popup": "popup.html",
+      "default_title":"cursor changer"
+    },
+
+    "permissions": ["<all_urls>", "activeTab", "tabs", "storage", "http://*/",
+      "https://*/" ],
+
+    "background": {
+      "scripts": ["jquery.js", "background.js"]
+    },
+    "web_accessible_resources":[
+      "./images/*.png"
+    ],
+
+    "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["jquery.js", "content.js"],
+          "css":["content.css"]
+        }
+      ]
+    
+}
