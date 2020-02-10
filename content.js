@@ -1,10 +1,17 @@
 
-chrome.runtime.onMessage.addListener(function({message}, sender, sendResponse) {
-    if(message === "startChangeCursor"){
-        chrome.storage.local.get(['key'], function(result) {
-            $("body").css('cursor', `url(${result.key}) 1 1, auto`);
-          });
-       }
-  });
-
- 
+    function setCursor(url) {
+        $('body').css('cursor', `url(${url}) 1 1, auto`);
+      }
+      
+      chrome.storage.local.get('key', result => {
+        setCursor(result.key);
+      });
+      
+      chrome.storage.onChanged.addListener(changes => {
+        if (changes.key) {
+          setCursor(changes.key.newValue);
+        }
+      });      
+            
+          
+      
